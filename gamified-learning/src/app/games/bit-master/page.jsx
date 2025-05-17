@@ -5,11 +5,12 @@ import { BinaryNumber } from "@/components/binary";
 import { useState, useEffect } from "react";
 import BitMasterLogo from "./title";
 import { Levels, DifficultySelector } from "@/components/levels";
+import Progress from "@/components/progress";
 
 export default function BitMaster() {
     return (
-        <div className="p-10 bg-gray-900 drop-shadow-xl drop-shadow-gray-800" >
-            <BitMasterLogo/>
+        <div className="px-20 py-4 bg-gray-900 drop-shadow-xl drop-shadow-gray-800" >
+            <BitMasterLogo />
             <BitMasterUI></BitMasterUI>
         </div>
     );
@@ -73,7 +74,7 @@ function BitMasterInitialUI({ level, onDifficultySelect, onGo }) {
     return (
         <div>
             <DifficultySelector difficulty={level} onDifficultyChange={onDifficultySelect}></DifficultySelector>
-            <button className="w-130 my-2 px-4 py-2 border border-gray-300 rounded font-semibold bg-gray-300 text-gray-600 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-500" onClick={() => onGo()} >GO!</button>
+            <button className="w-full my-4 px-4 py-2 border border-gray-500 rounded font-semibold bg-gray-800 text-gray-400 hover:bg-gray-700" onClick={() => onGo()} >GO!</button>
         </div>
     );
 }
@@ -82,7 +83,7 @@ function BitMasterRunningUI({ level, showGuess = true, onStop }) {
     const [theNumber, setTheNumber] = useState(null);
     const [currentGuess, setCurrentGuess] = useState(undefined);
     const [completedGuess, setCompletedGuess] = useState([]);
-
+    const gamesToComplete = 2;
 
     let digits = 8;
     switch (level) {
@@ -95,10 +96,13 @@ function BitMasterRunningUI({ level, showGuess = true, onStop }) {
         case Levels.HARD:
             digits = 12;
             break;
+        case Levels.INSANE:
+            digits = 16;
+            break;
         default:
             break;
     }
-    const min = 50;
+    const min = digits * 6 + 1;
     const max = (2 ** digits) - 1;
 
     useEffect(() => {
@@ -108,17 +112,30 @@ function BitMasterRunningUI({ level, showGuess = true, onStop }) {
 
     const handleNewGuess = function (v) {
         setCurrentGuess(v);
+        if (v === theNumber) {
+            completedGuess.push(currentGuess);
+            if (completedGuess.length < gamesToComplete) {
+                const random = Math.floor(Math.random() * (max - min + 1)) + min;
+                setTheNumber(random);
+            } else {
+                onStop();
+            }
+        }
     }
 
     return (
         <div className="text-emerald-300">
-            <span className="mr-2 py-2 px-4 text-white text-xl rounded-full bg-teal-800">{theNumber}</span>
+            <Progress percentage={100*completedGuess.length / gamesToComplete} bg_fill_color="bg-emerald-700" />
+            <div>
+                <span className="mr-2 py-2 px-4 text-white text-xl rounded-full bg-emerald-800">{theNumber}</span>
+
+            </div>
             <BinaryNumber
                 digits={digits}
                 onValueChange={handleNewGuess}
             />
 
-            {showGuess && currentGuess ? <span className={`ml-2 py-2 px-4 text-xl rounded-full ${currentGuess === theNumber ? "bg-green-800" : "bg-red-800"}`}>{currentGuess}</span> : ""}
+            {showGuess && currentGuess ? <span className={`ml-2 py-2 px-4 text-xl rounded-full text-white ${currentGuess === theNumber ? "bg-green-600" : "bg-red-800"}`}>{currentGuess}</span> : ""}
             <br />
             {/* <Timer legend=""></Timer> */}
             <button
@@ -127,7 +144,7 @@ function BitMasterRunningUI({ level, showGuess = true, onStop }) {
                 STOP
             </button>
             <ul>
-                {completedGuess.map((g) => {<li>g.value</li>})}
+                {completedGuess.map((g) => { <li>g.value</li> })}
             </ul>
         </div>
     );
