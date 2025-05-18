@@ -1,4 +1,6 @@
+import Footer from "./footer";
 import "./globals.css";
+import Header from "./header";
 
 export const metadata = {
   title: "Gamified Learning by ProfSchimd",
@@ -10,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="it">
 
       <body className="bg-sky-50 dark:bg-sky-950 text-neutral-950 dark:text-neutral-50">
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col max-w-6xl mx-auto min-h-screen">
           <Header />
           <Main>{children}</Main>
           <Footer />
@@ -20,24 +22,12 @@ export default function RootLayout({ children }) {
   );
 }
 
-function Header({ children }) {
-  return (
-    <div>Header</div>
-  );
-}
-
 function Main({ children }) {
   return (
     <main className="flex-grow">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto py-8">
         {children}
       </div>
     </main>
-  );
-}
-
-function Footer({ children }) {
-  return (
-    <div>Footer</div>
   );
 }
