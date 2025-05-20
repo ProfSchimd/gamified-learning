@@ -60,6 +60,10 @@ export function BinaryInput({ value, index, onBitChanged, className, inputRef })
     }
   };
 
+  const handleFocus = (e) => {
+    e.target.select();
+  };
+
   return (
     <input
       type="text"
@@ -67,6 +71,7 @@ export function BinaryInput({ value, index, onBitChanged, className, inputRef })
       onChange={handleChange}
       ref={inputRef}
       className={`flex-1 text-inherit gap-1 ${className}`}
+      onFocus={handleFocus}
     />
   );
 }

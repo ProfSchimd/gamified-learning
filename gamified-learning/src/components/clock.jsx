@@ -28,14 +28,20 @@ export function Clock() {
     );
 }
 
-export function Timer({ legend = "Elapsed" }) {
+export function Timer({ 
+        legend = "Elapsed",
+        className="text-center",
+        onElapsedChange = () => {}
+    }) {
     const [timer, setTimer] = useState({ elapsed: 0, running: true, start: Date.now() });
     const intervalRef = useRef(null);
 
     useEffect(() => {
         if (!timer.running) return;
         intervalRef.current = setInterval(() => {
-            setTimer({...timer, elapsed: (Date.now() - timer.start)});
+            const elapsed = Date.now() - timer.start;
+            setTimer({...timer, elapsed: elapsed});
+            onElapsedChange(elapsed);
         }, 250);
 
         return () => {
@@ -47,9 +53,9 @@ export function Timer({ legend = "Elapsed" }) {
     }, [timer.running]);
 
     return (
-        <div className="dark:bg-sky-800 bg-sky-200  p-2 text-center">
+        <div className={`${className}`}>
             {legend ? <h1 className="text-2xl font-semibold mb-2">{legend}</h1> : ""}
-            <p suppressHydrationWarning={true} className={`text-4xl tracking-wide ${orbitron.className}`} >{formatTime((timer.elapsed /1000).toFixed(0) )}</p>
+            <p suppressHydrationWarning={true} className={`tracking-wide ${orbitron.className}`} >{formatTime((timer.elapsed /1000).toFixed(0) )}</p>
         </div>
     );
 
