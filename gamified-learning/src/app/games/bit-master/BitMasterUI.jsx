@@ -27,16 +27,23 @@ export default function BitMasterUI() {
     const stopGame = useCallback((completed, game, time) => {
         setGames(prevGames => [...prevGames, {
             completed,
-            level, 
+            level,
             game,
             time,
         }]);
         setGameState(GameStatus.FINISHED);
-    }, [level]); 
+    }, [level]);
 
     const difficultyChange = useCallback((newLevel) => {
         setLevel(newLevel);
     }, []);
+
+    const handleResetGames = () => {
+        const answer = confirm("Your are about to reset  your progress, continue?");
+        if (answer) {
+            setGames([]);
+        }
+    };
 
     return (
         <div>
@@ -55,9 +62,10 @@ export default function BitMasterUI() {
             )}
             {gameState === GameStatus.FINISHED && (
                 <BitMasterFinishedUI
-                    onRestart={initGame}
                     games={games}
                     level={level}
+                    onRestart={initGame}
+                    onReset={handleResetGames}
                 />
             )}
         </div>

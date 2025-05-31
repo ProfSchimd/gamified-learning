@@ -16,5 +16,7 @@ cd gamified-learning
 
 npm install tailwindcss @tailwindcss/postcss postcss
 npm install gray-matter remark remark-html next-mdx-remote
+npm install @next/mdx @mdx-js/loader @mdx-js/react @types/mdx
+
 
 

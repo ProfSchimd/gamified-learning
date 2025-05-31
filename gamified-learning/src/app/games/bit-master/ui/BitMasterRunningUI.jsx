@@ -12,6 +12,7 @@ export default function BitMasterRunningUI({ level, showGuess = true, onStop }) 
     const [currentGuess, setCurrentGuess] = useState(undefined);
     const [completedGuess, setCompletedGuess] = useState([]);
     const [elapsedTime, setElapsedTime] = useState(0);
+    const [isGameEnding, setIsGameEnding] = useState(false);
     const gamesToComplete = 2;
 
     let digits = 8;
@@ -32,25 +33,33 @@ export default function BitMasterRunningUI({ level, showGuess = true, onStop }) 
             break;
     }
 
-
     useEffect(() => {
         setTheNumber(randomNumber(digits));
     }, []);
 
     useEffect(() => {
-        if (completedGuess.length === gamesToComplete) {
-            onStop(true, completedGuess, elapsedTime);
+        if (completedGuess.length === gamesToComplete && !isGameEnding) {
+            setIsGameEnding(true);
+            // Delay the onStop call to allow progress animation to complete
+            setTimeout(() => {
+                onStop(true, completedGuess, elapsedTime);
+            }, 800); 
         }
-    }, [completedGuess, onStop, elapsedTime]);
+    }, [completedGuess, onStop, elapsedTime, isGameEnding]);
 
     const handleNewGuess = (guess) => {
+        if (isGameEnding) return;
+        
         setCurrentGuess(guess);
         if (guess !== theNumber) {
             return;
         }
         setCompletedGuess([...completedGuess, guess]);
-        setTheNumber(randomNumber(digits));
-
+        
+        // Only generate new number if we haven't completed all games
+        if (completedGuess.length + 1 < gamesToComplete) {
+            setTheNumber(randomNumber(digits));
+        }
     }
 
     return (
@@ -87,8 +96,9 @@ export default function BitMasterRunningUI({ level, showGuess = true, onStop }) 
             <button
                 className={BUTTON_STYLES.neutralFull}
                 onClick={() => onStop(false, completedGuess, elapsedTime)}
+                disabled={isGameEnding}
             >
-                STOP
+                {isGameEnding ? "FINISHING..." : "STOP"}
             </button>
         </div>
     );
