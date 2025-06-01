@@ -5,8 +5,8 @@ export const Games = [
         description: "Convert Fast. Think Binary.",
     },
     {
-        name: "AutoMister",
-        relPath: "/games/auto-mister",
-        description: "Build Words. Beat States. Become the AutoMister."
-    }
+        name: "MasKing",
+        relPath: "/games/masking",
+        description: "Be the /Masks K.I.N.G",
+    },
 ];
