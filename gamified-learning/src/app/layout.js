@@ -11,8 +11,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="it">
 
-      <body className="bg-sky-50 dark:bg-sky-950 text-neutral-950 dark:text-neutral-50">
-        <div className="flex flex-col max-w-6xl mx-auto min-h-screen">
+      <body className="bg-white dark:bg-black text-neutral-950 dark:text-neutral-50">
+        <div className="bg-sky-50 dark:bg-sky-950 drop-shadow-2xl dark:drop-shadow-gray-400 flex flex-col max-w-6xl mx-auto min-h-screen">
           <Header />
           <Main>{children}</Main>
           <Footer />

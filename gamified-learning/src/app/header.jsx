@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 const menu = [
-    { link: "/learn", text: "Learn" },
-    { link: "/practice", text: "Practice" },
+    // { link: "/learn", text: "Learn" },
+    // { link: "/practice", text: "Practice" },
     { link: "/about", text: "About" },
 ];
 
@@ -14,9 +14,17 @@ export default function Header() {
     return (
         <header className="bg-sky-600 dark:bg-sky-800 text-white">
             <div className="container  mx-auto flex items-center justify-between px-4 py-3">
-                <Link href="/" className="text-2xl font-bold tracking-tight">
-                    🎓 Learning with games
-                </Link>
+                {/* <Link href="/" className="text-2xl font-bold tracking-tight">
+                    🎓 Gamified Learning - @ProfSchimd
+                </Link> */}
+<Link href="/" className="flex items-center gap-3">
+  <span className="text-4xl">🎓</span>
+  <div className="flex flex-col">
+    <span className="text-2xl font-bold tracking-tight">Gamified Learning</span>
+    <span className="font-mono font-thin">@ProfSchimd</span>
+  </div>
+</Link>
+                
 
                 <div className={`hidden md:flex gap-4`}>
                     {[...menu].map((item, i) => (

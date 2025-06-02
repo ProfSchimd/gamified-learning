@@ -1,3 +1,6 @@
+"use client";
+
+import Modal from "@/components/Modal";
 import { Games } from "@/config/games";
 import { Utils } from "@/config/util";
 import Link from "next/link";
@@ -5,13 +8,9 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div>
-      <div className="py-2">
-        <h1 className="text-4xl  py-1">Gamified Learning</h1>
-        <h2 className="text-2xl font-thin">@ProfSchimd</h2>
-      </div>
       <main>
-        Studia, gioca impara.
-        <div>
+
+        <div className="px-8">
           <h2 className="text-lg">Games</h2>
           <ul>
             {[...Games].map((game) => (

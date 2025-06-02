@@ -7,6 +7,6 @@ export const Games = [
     {
         name: "MasKing",
         relPath: "/games/masking",
-        description: "Be the /Masks K.I.N.G",
+        description: "Be the K.I.N.G/Masks",
     },
 ];

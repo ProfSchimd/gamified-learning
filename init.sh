@@ -14,7 +14,10 @@ npx create-next-app@latest gamified-learning \
   --src-dir
 cd gamified-learning
 
+# Styling, icons, ...
 npm install tailwindcss @tailwindcss/postcss postcss
+npm install react-icons
+# Next packages are used for markdown (likely to be redundant)
 npm install gray-matter remark remark-html next-mdx-remote
 npm install @next/mdx @mdx-js/loader @mdx-js/react @types/mdx
 

@@ -24,7 +24,7 @@ export default function MasKingLogo() {
 
                 <text className="fill-sky-600 text-mono" x="50%" y="94%" dominantBaseline="middle" textAnchor="middle"
                     fontFamily="monospace" fontSize="14">
-                    Be the /Masks K.I.N.G
+                    Be the K.I.N.G/Masks
                 </text>
             </svg>
         </>
