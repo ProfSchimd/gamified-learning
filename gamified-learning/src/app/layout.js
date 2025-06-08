@@ -1,6 +1,7 @@
 import Footer from "./footer";
 import "./globals.css";
 import Header from "./header";
+import 'katex/dist/katex.min.css';
 
 export const metadata = {
   title: "Gamified Learning by ProfSchimd",

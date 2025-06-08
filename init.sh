@@ -18,8 +18,11 @@ cd gamified-learning
 npm install tailwindcss @tailwindcss/postcss postcss
 npm install react-icons
 # Next packages are used for markdown (likely to be redundant)
-npm install gray-matter remark remark-html next-mdx-remote
+npm install gray-matter remark remark-html  next-mdx-remote 
+npm install remark-math katex rehype-katex 
 npm install @next/mdx @mdx-js/loader @mdx-js/react @types/mdx
+
+npm install -D @tailwindcss/typography
 
 
 
