@@ -1,6 +1,5 @@
 "use client";
 
-import Modal from "@/components/Modal";
 import { Games } from "@/config/games";
 import { Utils } from "@/config/util";
 import Link from "next/link";
